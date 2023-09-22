@@ -1,0 +1,10 @@
+<!-- Todo List -->
+<template>
+    <template lwc:if={todoList}>
+        <template for:each={todoList} for:item="todo">
+            <div key={todo.Id} onclick={handleClick} id={todo.Id}>
+                {todo.Name}
+            </div>
+        </template>
+    </template>
+</template>

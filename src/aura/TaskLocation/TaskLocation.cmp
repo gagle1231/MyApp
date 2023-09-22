@@ -1,0 +1,10 @@
+<!--
+ - Created by ge.Kim on 2023-08-31.
+ -->
+
+<aura:component controller="TaskController" description="TaskLocation" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="mapMarkers" type="Object[]"/>
+    <aura:handler name="init" value="{! this }" action="{! c.fnInit }"/>
+    <aura:handler event="force:refreshView" action="{!c.fnInit}" />
+    <lightning:map mapMarkers="{! v.mapMarkers }" zoomLevel="15"/>
+</aura:component>

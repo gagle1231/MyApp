@@ -1,0 +1,17 @@
+<!--
+ - Created by ge.Kim on 2023-09-05.
+ -->
+
+<!-- Todo Detail -->
+<template>
+    <template lwc:if={todoId}>
+        <div class="container">
+            <p>
+                {todoId}
+            </p>
+        </div>
+    </template>
+    <template lwc:else>
+        <div>Select a bike</div>
+    </template>
+</template>

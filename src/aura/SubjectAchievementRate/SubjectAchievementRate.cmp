@@ -1,0 +1,14 @@
+<aura:component  description="SubjectAchievementRate" controller="SubjectController" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute type="Double" name="rate"/>
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+    <lightning:card title="목표 달성률">
+        <p class="slds-p-horizontal_medium">
+        <div class="slds-grid slds-grid_align-spread slds-p-bottom_x-small" id="progress-bar-label-id-6">
+            <span aria-hidden="true">
+                <strong>{!v.rate}% Complete🌟</strong>
+            </span>
+        </div>
+        <lightning:progressBar value="{!v.rate}" size="large" />
+        </p>
+    </lightning:card>
+</aura:component>

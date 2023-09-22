@@ -1,0 +1,66 @@
+<aura:component description="TaskRecordDetail" controller="TaskController" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute type="Object" name="objTask"/>
+    <aura:attribute type="List" name="listTodo"/>
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.fnInit}" />
+    <aura:attribute name="recordError" type="String" access="private"/>
+    <force:recordData aura:id="recordHandler"
+                      recordId="{!v.recordId}"
+                      fields="Id"
+                      targetError="{!v.recordError}"
+                      recordUpdated="{!c.handleRecordUpdated}" />
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title slds-text-heading_medium">
+                        <span>&#128681;{!v.objTask.Name}</span>
+                    </h2>
+                </div>
+                <aura:if isTrue="{!v.objTask.isFinished__c}">
+                    <lightning:button label="완료 취소" onclick="{!c.fnFinishTask}"/>
+                    <aura:set attribute="else">
+                        <lightning:button label="완료로 표시" onclick="{!c.fnFinishTask}"/>
+                    </aura:set>
+                </aura:if>
+                <lightning:button label="Edit" onclick="{!c.fnEditRecord}"/>
+                <lightning:button label="Delete" onclick="{!c.fnDeleteRecord}"/>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <h5 class="slds-text-heading_small">{!v.objTask.Content__c}</h5>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <article class="slds-card slds-card_boundary">
+                <div class="slds-card__header slds-grid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__body">
+                            <h2 class="slds-card__header-title">
+                                <a href="./related/To_do_list__r/view" class="slds-card__header-link slds-truncate" title="Card Header">
+                                    <span>&#128209;To do List</span>
+                                </a>
+                            </h2>
+                        </div>
+                        <lightning:button label="추가" onclick="{!c.fnAddToDo}"/>
+                    </header>
+                </div>
+                <div class="slds-card__body slds-card__body_inner">
+                    <ul class="slds-list slds-has-dividers_top slds-has-divider_bottom slds-has-block-links_space">
+                        <aura:iteration items="{!v.listTodo}" var="todo">
+                            <li class="slds-item">
+                                <aura:if isTrue="{!todo.isFinished__c}">
+                                    <div class="slds-list_inline"><input id="{!todo.Id}" type="checkbox" onchange="{!c.fnChangeState}" checked="checked"/>
+                                    <a href="{!'/'+todo.Id}"><span style="text-decoration:line-through">{!todo.Name}</span></a></div>
+                                    <aura:set attribute="else">
+                                        <div class="slds-list_inline"> <input id="{!todo.Id}" type="checkbox" onchange="{!c.fnChangeState}"/>
+                                            <a href="{!'/'+todo.Id}"><span style="text-decoration:none">{!todo.Name}</span></a></div>
+                                    </aura:set>
+                                </aura:if>
+                            </li>
+                        </aura:iteration>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </article>
+</aura:component>

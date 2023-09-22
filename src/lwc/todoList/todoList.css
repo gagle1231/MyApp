@@ -1,0 +1,8 @@
+/**
+ * Created by ge.Kim on 2023-09-05.
+ */
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

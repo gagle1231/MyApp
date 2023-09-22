@@ -1,0 +1,21 @@
+<!--
+ - Created by ge.Kim on 2023-09-05.
+ -->
+
+<!-- App Component -->
+<template>
+    <template lwc:if={recordId}>
+        <lightning-card title="Detail">
+            <p class="slds-p-horizontal_small">
+                <lightning-record-form record-id={recordId} object-api-name={objectApiName} mode="view" layout-type="Compact">
+                </lightning-record-form>
+            </p>
+        </lightning-card>
+        <span>{achievementRate}</span>
+    </template>
+    <template lwc:else>
+        <div>{name}</div>
+        <div>{description}</div>
+
+    </template>
+</template>

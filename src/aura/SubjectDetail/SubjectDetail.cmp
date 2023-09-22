@@ -1,0 +1,42 @@
+<!--
+ - Created by ge.Kim on 2023-08-30.
+ -->
+
+<aura:component controller="SubjectController" description="SubjectDetail" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute type="Object" name="objSubject"/>
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.fnInit}" />
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title slds-text-heading_medium">
+                        <span>📝Detail</span>
+                    </h2>
+                </div>
+                <aura:if isTrue="{!v.objSubject.isFinished__c}">
+                    <span class="slds-text-color_success slds-text-heading_small">&#128539;완료됨</span>
+                    <aura:set attribute="else">
+                        <lightning:button class="slds-button" label="완료로 표시" onclick="{!c.fnConvertState}"/>
+                    </aura:set>
+                </aura:if>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner slds-text-heading_large">
+            <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Subject__c">
+                <div class="slds-border_bottom">
+                    <lightning:outputField fieldName="Name"/>
+                </div>
+                <div class="slds-border_bottom">
+                    <lightning:outputField fieldName="Category__c"/>
+                </div>
+                <div class="slds-border_bottom">
+                    <lightning:outputField fieldName="StartDate__c"/>
+                </div>
+                <div>
+                    <lightning:outputField fieldName="EndDate__c" />
+                </div>
+            </lightning:recordViewForm>
+        </div>
+    </article>
+</aura:component>

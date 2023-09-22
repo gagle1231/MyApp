@@ -1,0 +1,35 @@
+<!--
+ - Created by ge.Kim on 2023-08-29.
+ -->
+<aura:component description="TaskList" controller="TaskListController" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="taskList" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getInit}"/>
+
+    <lightning:card title="Task List" actions="">
+        <aura:iteration var="task" items="{!v.taskList}">
+            <article class="slds-card" title="Task List">
+                <div class="slds-card__header slds-grid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__body">
+                            <h2 class="slds-card__header-title">
+                                <a href="{!'/'+task.Id}" class="slds-card__header-link slds-truncate">
+                                    <aura:if isTrue="{!task.isFinished__c}">
+                                        <span style="text-decoration: line-through;">📌{!task.Name}</span>
+                                    </aura:if>
+                                    <aura:if isTrue="{!!task.isFinished__c}">
+                                        <span>📌{!task.Name}</span>
+                                    </aura:if>
+                                </a>
+
+                            </h2>
+                        </div>
+                    </header>
+                </div>
+                <div class="slds-card__body slds-card__body_inner">
+                    {!task.Content__c}
+                </div>
+            </article>
+        </aura:iteration>
+    </lightning:card>
+
+</aura:component>

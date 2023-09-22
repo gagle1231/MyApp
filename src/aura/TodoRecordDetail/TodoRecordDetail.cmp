@@ -1,0 +1,31 @@
+<aura:component controller="TodoController" description="TodoRecordDetail" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes">
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="objTodo" type="Todo__c"/>
+    <aura:handler event="force:refreshView" action="{!c.fnInit}" />
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+    <lightning:card title="{!v.objTodo.Name}">
+        <aura:set attribute="actions">
+            <lightning:button label="Edit" onclick="{!c.fnEditBtnClick}"/>
+            <lightning:button label="Event에 추가" onclick="{!c.fnAddToEvent}"/>
+        </aura:set>
+        <p class="slds-p-horizontal_medium">
+            {!v.objTodo.Content__c}
+        </p>
+        <div class="slds-card__body slds-card__body_inner">
+            <p>
+                <lightning:input type="datetime" name="input4" label="시작 날짜/시간" disabled="true" value="{!v.objTodo.doDate__c}" />
+            </p>
+            <p>
+                <lightning:input type="datetime" name="input4" label="종료 날짜/시간" disabled="true" value="{!v.objTodo.EndDateTime__c}" />
+            </p>
+            <p>
+                <aura:if isTrue="{!v.objTodo.Task__r.Type__c == '온라인'}">
+                    {!v.objTodo.Task__r.SourceLink__c}
+                    <aura:set attribute="else">
+                        {!v.objTodo.Task__r.Task__r.TaskLocation__Street__s}
+                    </aura:set>
+                </aura:if>
+            </p>
+        </div>
+    </lightning:card>
+</aura:component>
