@@ -24,7 +24,16 @@ public with sharing class Task_tr extends TriggerHandler{
     }
 
     public override void beforeUpdate() {
-
+        List<Todo__c> listTodo = new List<Todo__c>();
+        for(Task__c task: listNew){
+            if(task.isFinished__c){
+                for(Todo__c todo: [SELECT isFinished__c FROM Todo__c WHERE Task__c = :task.Id]){
+                    todo.isFinished__c = true;
+                    listTodo.add(todo);
+                }
+            }
+        }
+        update listTodo;
     }
 
 }
