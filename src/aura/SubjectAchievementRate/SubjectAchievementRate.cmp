@@ -9,6 +9,10 @@
             </span>
         </div>
         <lightning:progressBar value="{!v.rate}" size="large" />
+        <aura:if isTrue="{!v.rate == 100}">
+            <span class="slds-text-color_success">목표 달성!</span>
+        </aura:if>
         </p>
+
     </lightning:card>
 </aura:component>
