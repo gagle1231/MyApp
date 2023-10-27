@@ -4,9 +4,7 @@
 
 <!-- Todo Item -->
 <template>
-    <div class="container">
-        <a onclick={tileClick}>
-            <div class="title">{todo.fields.Name.value}</div>
-        </a>
+    <div class="container" onclick={tileClick} onmouseover={handleMouseOver} onmouseout={handleMouseOut}>
+        {todo.Name}
     </div>
 </template>

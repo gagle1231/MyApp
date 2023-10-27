@@ -5,11 +5,21 @@
 import { LightningElement, api } from 'lwc';
 export default class Tile extends LightningElement {
   @api todo;
-  tileClick() {
-    const event = new CustomEvent('titlelick', {
-      detail: this.todo.fields.Id.value
+
+  tileClick(event) {
+    event.target.style += 'background-color: red;';
+    console.log(this.todo.Id);
+    const customEvent = new CustomEvent('view', {
+      detail: this.todo.Id
     });
-    // Fire the event from c-tile
-    this.dispatchEvent(event);
+    this.dispatchEvent(customEvent);
+  }
+  handleMouseOver(event){
+      const e = event.target;
+      e.style.cssText = 'text-decoration:underline;';
+  }
+  handleMouseOut(event){
+      const e = event.target;
+      e.style['text-decoration'] = 'none';
   }
 }

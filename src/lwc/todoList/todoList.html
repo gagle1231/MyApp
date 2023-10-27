@@ -1,10 +1,35 @@
 <!-- Todo List -->
 <template>
-    <template lwc:if={todoList}>
-        <template for:each={todoList} for:item="todo">
-            <div key={todo.Id} onclick={handleClick} id={todo.Id}>
-                {todo.Name}
-            </div>
+    <lightning-card class="slds-card slds-max-medium-size_1-of-2" title="To do List">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+            <tr class="slds-line-height_reset">
+                <th scope="col">
+                    <div class="slds-truncate" title="To do Name">To do Name</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                    <template lwc:if={todoList}>
+                        <template for:each={todoList} for:item="todo">
+                            <tr key={todo.Id} class="slds-hint-parent">
+                                <td>
+                                    <c-todo-item onview={handleClick} todo={todo}></c-todo-item>
+                                </td>
+                            </tr>
+                        </template>
+                    </template>
+            </tbody>
+        </table>
+        <!--<template lwc:if={todoList}>
+            <template for:each={todoList} for:item="todo">
+                <c-todo-item onview={handleClick} key={todo.Id} todo={todo}></c-todo-item>
+            </template>
+        </template>-->
+    </lightning-card>
+    <lightning-card class="slds-max-medium-size_1-of-2" title="To do Detail">
+        <template lwc:if={selectedObj}>
+            <c-todo-detail todo={selectedObj}></c-todo-detail>
         </template>
-    </template>
+    </lightning-card>
 </template>

@@ -4,4 +4,8 @@
     <description>Todo 목록</description>
     <isExposed>true</isExposed>
     <masterLabel>Todo List</masterLabel>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__Tab</target>
+    </targets>
 </LightningComponentBundle>
